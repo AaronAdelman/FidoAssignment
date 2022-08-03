@@ -10,23 +10,36 @@ import Alamofire
 
 struct ContentView: View {
     @State private var model: FCResult?
-    @State var fetching: Bool = false
+    @State private var fetching: Bool = true
     
     var body: some View {
         List {
             if fetching {
-                ProgressView("Fetching")
+                ProgressView("Fetching…")
             }
             if model == nil {
                 Text("Please wait…")
             } else {
-                Text(model!.status)
-                Text("\(model!.totalResults)")
+                let status = model!.status
+                if status != "ok" {
+                    Text(model!.status)
+                } else {
+                    Section {
+                        Text("\(model!.totalResults) articles")
+                    }
+                    
+                    Section {
+                        ForEach(0..<model!.articles.count, id: \.self) {
+                            let article = model!.articles[$0]
+                            FCArticleView(article: article)
+                        } // ForEach
+                    }
+                }
             }
         }
         .onAppear() {
             let API_KEY = "409c464bc7164c6b874a20e5b048e4e3"
-            let magicURLString = "https://newsapi.org/v2/everything?q=tesla&from=2022-07-03&sortBy=publishedAt&apiKey=\(API_KEY)"
+            let magicURLString = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=\(API_KEY)"
             debugPrint(#file, #function, magicURLString)
             AF.request(magicURLString).responseString {
                 response
