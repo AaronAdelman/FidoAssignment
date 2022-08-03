@@ -11,7 +11,7 @@ struct FCArticleCell: View {
     var article: FCArticle
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8.0) {
             HStack {
                 Text(article.source.name)
                 

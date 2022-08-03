@@ -12,7 +12,7 @@ struct FCArticleView: View {
 
     var body: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: 8.0) {
+            LazyVStack(alignment: .leading, spacing: 16.0) {
                 let urlToImage = article.urlToImage
                 if urlToImage != nil {
                     AsyncImage(url: URL(string: urlToImage!)) { image in

@@ -18,6 +18,18 @@ struct FCResult: Codable {
         case totalResults = "totalResults"
         case articles = "articles"
     }
+    
+    static func from(_ data: Data) -> (result: FCResult?, error: Error?) {
+        do {
+            let result = try JSONDecoder().decode(FCResult.self, from: data)
+//                    debugPrint(#file, #function, result)
+            return (result, nil)
+        } catch {
+//            debugPrint(#file, #function, error)
+            return (nil, error)
+        }
+        
+    }
 }
 
 // MARK: - FCArticle
