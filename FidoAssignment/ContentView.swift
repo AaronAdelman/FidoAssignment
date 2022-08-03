@@ -12,17 +12,46 @@ struct ContentView: View {
     @State private var model: FCResult?
     @State private var fetching: Bool = true
     
+    @Environment(\.scenePhase) var scenePhase
+    
+    fileprivate func loadData() {
+        self.fetching = true
+
+        let API_KEY = "409c464bc7164c6b874a20e5b048e4e3"
+        let magicURLString = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=\(API_KEY)"
+        debugPrint(#file, #function, magicURLString)
+        AF.request(magicURLString).responseString {
+            response
+            in
+            defer { self.fetching = false }
+            
+            debugPrint(#file, #function, response.value as Any)
+            if response.data != nil {
+                do {
+                    let result = try JSONDecoder().decode(FCResult.self, from: response.data!)
+                    print(#file, #function, result)
+                    self.model = result
+                } catch {
+                    print(error)
+                }
+            }
+        }
+    }
+    
     var body: some View {
         List {
             if fetching {
-                ProgressView("Fetching…")
+                Section {
+                    ProgressView("Fetching…")
+                }
             }
-            if model == nil {
-                Text("Please wait…")
-            } else {
+            
+            if model != nil {
                 let status = model!.status
                 if status != "ok" {
-                    Text(model!.status)
+                    Section {
+                        Text(model!.status)
+                    }
                 } else {
                     Section {
                         Text("\(model!.totalResults) articles")
@@ -38,27 +67,14 @@ struct ContentView: View {
             }
         }
         .onAppear() {
-            let API_KEY = "409c464bc7164c6b874a20e5b048e4e3"
-            let magicURLString = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=\(API_KEY)"
-            debugPrint(#file, #function, magicURLString)
-            AF.request(magicURLString).responseString {
-                response
-                in
-                self.fetching = true
-                defer { self.fetching = false }
-                
-                debugPrint(#file, #function, response.value as Any)
-                if response.data != nil {
-                    do {
-                        let result = try JSONDecoder().decode(FCResult.self, from: response.data!)
-                        print(#file, #function, result)
-                        self.model = result
-                    } catch {
-                        print(error)
-                    }
-                }
+            loadData()
+        }
+        .onChange(of: scenePhase) {
+            newPhase
+            in
+            if newPhase == .active {
+                loadData()
             }
-            
         }
     }
 }
