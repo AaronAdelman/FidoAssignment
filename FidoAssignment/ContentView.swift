@@ -10,9 +10,13 @@ import Alamofire
 
 struct ContentView: View {
     @State private var model: FCResult?
+    @State var fetching: Bool = false
     
     var body: some View {
         List {
+            if fetching {
+                ProgressView("Fetching")
+            }
             if model == nil {
                 Text("Please wait…")
             } else {
@@ -27,15 +31,18 @@ struct ContentView: View {
             AF.request(magicURLString).responseString {
                 response
                 in
+                self.fetching = true
+                defer { self.fetching = false }
+                
                 debugPrint(#file, #function, response.value as Any)
                 if response.data != nil {
-                do {
-                    let result = try JSONDecoder().decode(FCResult.self, from: response.data!)
-                    print(#file, #function, result)
-                    self.model = result
-                } catch {
-                    print(error)
-                }
+                    do {
+                        let result = try JSONDecoder().decode(FCResult.self, from: response.data!)
+                        print(#file, #function, result)
+                        self.model = result
+                    } catch {
+                        print(error)
+                    }
                 }
             }
             
