@@ -27,8 +27,8 @@ struct FCArticle: Codable {
     var title: String
     var articleDescription: String
     var url: String
-    var urlToImage: String
-    var publishedAt: Date
+    var urlToImage: String?
+    var publishedAt: String
     var content: String
 
     enum CodingKeys: String, CodingKey {

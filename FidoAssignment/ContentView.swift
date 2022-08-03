@@ -6,11 +6,10 @@
 //
 
 import SwiftUI
-
-let API_KEY = "409c464bc7164c6b874a20e5b048e4e3"
+import Alamofire
 
 struct ContentView: View {
-    var model: FCResult?
+    @State private var model: FCResult?
     
     var body: some View {
         List {
@@ -22,6 +21,23 @@ struct ContentView: View {
             }
         }
         .onAppear() {
+            let API_KEY = "409c464bc7164c6b874a20e5b048e4e3"
+            let magicURLString = "https://newsapi.org/v2/everything?q=tesla&from=2022-07-03&sortBy=publishedAt&apiKey=\(API_KEY)"
+            debugPrint(#file, #function, magicURLString)
+            AF.request(magicURLString).responseString {
+                response
+                in
+                debugPrint(#file, #function, response.value as Any)
+                if response.data != nil {
+                do {
+                    let result = try JSONDecoder().decode(FCResult.self, from: response.data!)
+                    print(#file, #function, result)
+                    self.model = result
+                } catch {
+                    print(error)
+                }
+                }
+            }
             
         }
     }
