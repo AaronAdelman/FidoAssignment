@@ -14,6 +14,7 @@
 		A5171A82289A4FF600CCA91A /* FidoAssignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5171A81289A4FF600CCA91A /* FidoAssignmentTests.swift */; };
 		A5171A8C289A4FF700CCA91A /* FidoAssignmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5171A8B289A4FF700CCA91A /* FidoAssignmentUITests.swift */; };
 		A5171A8E289A4FF700CCA91A /* FidoAssignmentUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5171A8D289A4FF700CCA91A /* FidoAssignmentUITestsLaunchTests.swift */; };
+		A5171A9B289A526E00CCA91A /* FCResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5171A9A289A526E00CCA91A /* FCResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		A5171A87289A4FF700CCA91A /* FidoAssignmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FidoAssignmentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5171A8B289A4FF700CCA91A /* FidoAssignmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidoAssignmentUITests.swift; sourceTree = "<group>"; };
 		A5171A8D289A4FF700CCA91A /* FidoAssignmentUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidoAssignmentUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A5171A9A289A526E00CCA91A /* FCResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				A5171A72289A4FF400CCA91A /* ContentView.swift */,
 				A5171A74289A4FF600CCA91A /* Assets.xcassets */,
 				A5171A76289A4FF600CCA91A /* Preview Content */,
+				A5171A9A289A526E00CCA91A /* FCResult.swift */,
 			);
 			path = FidoAssignment;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			files = (
 				A5171A73289A4FF400CCA91A /* ContentView.swift in Sources */,
 				A5171A71289A4FF400CCA91A /* FidoAssignmentApp.swift in Sources */,
+				A5171A9B289A526E00CCA91A /* FCResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
