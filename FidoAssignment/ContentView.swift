@@ -19,7 +19,7 @@ struct ContentView: View {
         self.fetching = true
 
         let API_KEY = "409c464bc7164c6b874a20e5b048e4e3"
-        let magicURLString = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=\(API_KEY)"
+        let magicURLString = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=\(API_KEY)" // "Top business headlines in the US right now", which is about as close to "everything" one is going to get without serious study of what the news API can do.
 //        debugPrint(#file, #function, magicURLString)
         AF.request(magicURLString).responseString {
             response

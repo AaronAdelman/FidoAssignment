@@ -34,6 +34,11 @@ struct FCArticleView: View {
                 Text(article.title)
                     .font(.title)
                 
+                let date = Date.from(article.publishedAt)
+                if date != nil {
+                    Text(date!.formatted())
+                }
+                
                 let description = article.articleDescription
                 if description != nil {
                     Text(description!)
